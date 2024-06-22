@@ -1,19 +1,26 @@
 package springbean.core.order;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import springbean.core.AppConfig;
 import springbean.core.member.Grade;
 import springbean.core.member.Member;
 import springbean.core.member.MemberService;
-import springbean.core.member.MemberServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrderServiceTest {
 
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService;
+    OrderService orderService;
+
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        this.memberService = appConfig.memberService();
+        this.orderService = appConfig.orderService();
+    }
 
     @DisplayName("주문을 생성한다.")
     @Test
